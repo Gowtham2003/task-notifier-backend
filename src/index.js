@@ -1,7 +1,8 @@
 const express = require('express');
 var cors = require('cors');
 const mongoose = require('mongoose');
-
+const dotenv = require('dotenv');
+dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -15,7 +16,7 @@ app.get('/', async (req, res) => {
 });
 const start = async () => {
   try {
-    await mongoose.connect('');
+    await mongoose.connect(process.env.MONGO_URI);
     app.listen(3000, () =>
       console.log('Server started on port http://localhost:3000')
     );
